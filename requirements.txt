@@ -1,0 +1,17 @@
+# Python Notes - Dependencies
+# ===========================
+
+# Jupyter for interactive notebooks
+jupyter>=1.0.0
+notebook>=7.0.0
+ipykernel>=6.0.0
+
+# Code quality
+black>=24.0.0
+isort>=5.0.0
+pylint>=3.0.0
+
+# Useful utilities for learning
+rich>=13.0.0          # Pretty printing & tables
+matplotlib>=3.8.0     # Plotting & visualization
+numpy>=1.26.0         # Numerical computing

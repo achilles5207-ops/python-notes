@@ -1,0 +1,180 @@
+
+--- dms_697b03fd0cabcLIST.pptx ---
+LISTS
+• Understand the basic concepts of various collection data types in python such as List, Tuples, sets and Dictionary. 
+Introduction to List
+Each value of a list is called as element. 
+Variable = [element-1, element-2, element-3 …… element-n]
+Accessing List elements
+Positive value of index counts from the beginning of the list 
+Marks = [10, 23, 41, 75]
+
+--- dms_698436f2957e2Lab5 - TUPLE and set.docx ---
+Assignment # 5
+(Tuple, Set)
+Create a tuple with different data types and an empty tuple using built-in function.
+Create a default tuple of strings without parenthesis and sort the string.
+Count the number of elements in a tuple and add two new elements
+(one using concatenation and one using a built-in function).
+Remove elements of a tuple that are present at odd index positions.
+Take a tuple of mixed data types and find the square of each numeric element.
+Take a tuple of five tuples and replace the last value of each tuple in a list of tuples with 100.
+Sort a list of tuples of 3values in descending order based on the 3rd values of each tuple.
+
+--- dms_6989953ce464cclass2.pptx ---
+Python Fundamentals
+Python Data Types
+Variables in Python
+Objects
+Objects
+What is late binding?
+What is runtime flexibility?
+Literals and Constants
+
+--- dms_6989958c0bd85class4.pptx ---
+Control Structures
+A program statement that causes a jump of control from one part of the program to another is called control structure or control statement.
+Sequential Statement
+A sequential statement is composed of a sequence of statements which are executed one after another.
+Example
+Alternative 
+• Simple if statement 
+Simple if statement
+
+--- dms_698996742ddd9class5.pptx ---
+Tuples, Sets AND String
+Tuples
+Introduction to Tuples
+Creating Tuples
+MyTup1 = (23, 56, 89, 'A', 'E', 'I', "Tamil")
+Creating tuples using tuple( ) function
+MyTup3 = tuple( [23, 45, 90] )
+Creating Single element tuple
+
+--- dms_6996abc436c67Lab 7 - FUNCTION Assignment.docx ---
+Assignment#7
+(FUNCTIONS)
+Multiply the numbers present in a list and display the final product.
+Print the twin prime numbers between 2 to 100.
+Find the reverse of a string.
+Accept a string and count  the number of upper and lower case letters.
+Take a list of numbers and return a new list which will contain only the distinct elements of the first list.
+Print the odd numbers from a given list by taking the list as an argument to the function
+Find the greatest among three numbers using lambda function.
+Use lambda functions to perform various task like + , -   ,*, /,  %
+
+--- dms_69b25a359c019Assignment 8crm.docx ---
+Assignment 8
+Topic: Class and Objects
+Create a class Point having instance variable x and y. Create two points and find the distance and midpoint.
+Create 05 random points as a List of objects and the distance to the origin of each point. Import the point class of Q1 here.
+Create a class Circle having radius as instance variable. Find the area and circumference of the circle.
+Create two circle and check both circle intersect or not.
+Create a class Rectangle by entering two corners coordinate (import Point class here). Find the area of rectangle.
+Create class Fraction with num and denom as instance variable. Display the fraction in simplified form.
+Create a class MyDate with dd, mm yy as instance variable. Subtract the date from today’s date, check the student is eligible to vote or not.
+Create a class Student that store roll number , name and three students mark in three subjects. Create a list of 4 students. Rank the students based on the descending order of the total mark.
+
+--- dms_69bb950865146Lab9.docx ---
+Assignment 9
+Topic: Operator Overloading
+Q1.  Create a class Fraction with instance variables num and denom. Implement operator overloading methods __add__, __sub__, __mul__, and __truediv__ to perform addition, subtraction, multiplication, and division of two fraction objects respectively. Ensure that the result of every operation is returned in its simplest form by reducing the fraction. Implement the __str__ method to display the fraction in the form num/denom.
+Q2. Create a class Complex with instance variables real and imag. Implement operator overloading methods __add__, __sub__, __mul__, and __truediv__ to perform arithmetic operations between two complex numbers. Implement the __str__ method to display the complex number in the form a + bi or a - bi.
+Q3. Create a class Student with instance variables roll, name, and marks in three subjects. Implement a method to compute the total marks of each student. Overload comparison operators such as __lt__ or __gt__ to compare students based on their total marks. Create a list of at least four student objects, sort them in descending order of total marks, and assign ranks accordingly. Display the ranked list with student details.
+Q4. Create a class MyDate with instance variables dd, mm, and yyyy. Overload the __add__ operator to allow addition of an integer number of days to a date object. Using this, compute and display the next day (tomorrow), the date after 10 days, and the date after 400 days. Your implementation should correctly handle changes in months and years, including leap years. Implement the __str__ method to display the date in a readable format like dd-mm-yyyy.
+Q5. Using the MyDate class, overload comparison operators __eq__, __lt__, and __gt__ to compare two date objects. The comparison should be based on chronological order (year, then month, then day). Demonstrate the comparison by checking whether two dates are equal, or which one is earlier or later.
+
+--- dms_69be99f51a0d7class7.pptx ---
+Class and Objects inPython
+Objects
+Objects
+Class
+Class Syntax
+Class
+Constructor or __init__ method
+Magic methods
+
+--- dms_69be9a3c0a39aclass8.pptx ---
+InheritanceinPython
+Introduction
+Introduction
+Introduction
+Types of Inheritance
+1. Single Inheritance
+super() Function
+2. Multilevel Inheritance
+
+--- dms_69ce0041b689dLab10.docx ---
+Assignment 10
+Topic : Inharitance
+Create a class Person with attributes name and age, and a derived class Student that adds roll_no and marks. Override a method display() in the child class to show all details, thereby illustrating method overriding along with inheritance.
+Create three classes Person, Employee, and Manager, where Person contains basic details, Employee adds salary, and Manager includes department information. Use the super() function to call constructors and implement a display() method to show how data flows through multiple levels of inheritance.
+Create classes Point, Circle, and Cylinder using multilevel inheritance. Circle inherits from Point, and Cylinder inherits from Circle. Compute the area of the circle and the volume of the cylinder.
+Creating two classes A and B, both having a method show(), and a derived class C that inherits from both. Create an object of class C, call the show() method, and print the Method Resolution Order (MRO) using __mro__ to explain which method is executed.
+Create an abstract class Shape with an abstract method getArea(). Derive classes such as Triangle, Rectangle, and Circle, and implement the getArea() method in each class to show method overriding and abstraction in action.
+Create an abstract class Employee with an abstract method calculate_salary(), and derive classes such as FullTimeEmployee, PartTimeEmployee, and Intern. Override the salary calculation method in each class and use a list of objects to demonstrate runtime polymorphism by displaying salary details for multiple employees.
+Design a hybrid inheritance structure by combining single and multiple inheritance, create classes like Person, Student, Employee, and Intern, where Intern inherits from both Student and Employee. Demonstrate how attributes and methods are accessed in such a structure.
+
+--- dms_69d5be6c36a37Lab11.docx ---
+Assignment 11
+Topic : File Handling, Exception Handling, Database Handling
+Write a Python program to open and read a file.  (Create a text file students.txt with at least 5 student records containing: Roll Fname Lname English Math Science IT)
+Handle FileNotFoundError if the file does not exist.
+Find the student with the highest marks in English and Display  its Roll No, FName, LName, Marks (in the else block)
+Close the file in the finally block.
+Write a Python program to divide two numbers entered by the user using command line argument.
+Handle IndexError if no argument is passed
+Handle ValueError if character  is passed
+Handle ZeroDivisionError if denominator is Zero.
+
+--- dms_69d8d89761c72class9.pptx ---
+Files Handling
+Steps To Read Information From A File
+Opening Files
+Opening Modes
+Closing The File
+Reading a File
+Reading a file
+Reading Files Example
+
+--- dms_69d8d8c339c52class10.pptx ---
+Exception Handling
+Exception handling
+Default Exception Handling
+Building Blocks of Exception Handling
+Basic try-except Syntax:
+Basic try-except Syntax:
+Catching Specific Errors
+Using else with try-except
+
+--- dms_69d8d8ede4238class11.pptx ---
+Database Handling
+What is SQLite?
+SQLite Storage Concept
+Steps to Connect SQLite to Python
+Syntax to Connect Python to SQLite
+Create Database: MyData
+Introduction to MySQL
+MySQL Storage Concept
+
+--- dms_69e7586361f0dLab12.docx ---
+Assignment 12
+Topic: Numpy and Pandas
+Create a 5 × 5 matrix initialized with zeros using np.zeros() and another 5 × 5 matrix initialized with ones using np.ones(). Modify the zero matrix such that its main diagonal elements are set to 1 and all border elements are set to 2. Then, add the two matrices and display the resulting matrix. Further, compute and print the row-wise sum and column-wise sum of the final matrix.
+Create a 6 × 6 matrix with values from 1 to 36 arranged row-wise. Using matrix indexing, perform the following operations: extract and print the element at position (3rd row, 4th column), replace all elements in the 2nd row with zero, and update the last column of the matrix with the value 100. Display the matrix after each modification.
+Create a 6 × 6 matrix with values from 1 to 36 arranged row-wise. Using slicing techniques, extract the following submatrices: the top-left 3 × 3 submatrix, the last two rows, and every alternate column of the matrix. Display all the extracted slices clearly and explain the slicing syntax used.
+Create a 3×3 matrix.
+Find trace
+Find its determinant
+Find its inverse
+Find their rank
+
+--- dms_69e758c377cbbclass12.pptx ---
+Data Analytics
+Python Package for Data Analytics
+Import array
+Syntax For Creating An Array.
+Array Operations
+Introduction to NumPy
+Differences between Numpy Arrays and Arrays
+Array Creation in NumPy
