@@ -1,323 +1,380 @@
-# 📘 The Ultimate Master Guide: Module 3 - Object Oriented Programming (OOP)
+# 📘 Comprehensive Textbook Guide: Module 3 - Object-Oriented Programming (OOP) & Exception Handling
 
----
+## Chapter 9: Fundamentals of Object-Oriented Programming
 
-## 🏛️ Section 1: Classes and Objects
+### 9.1 Introduction to OOP
+Object-Oriented Programming (OOP) is a programming paradigm that revolves around the concept of "objects" rather than "actions", and "data" rather than "logic". It allows programmers to map real-world entities into code.
 
-Object-Oriented Programming (OOP) is a programming paradigm based on the concept of "objects", which contain data (attributes) and code (methods).
+#### Key Principles of OOP:
+1.  **Encapsulation:** Grouping data and methods into a single unit (class) and restricting access.
+2.  **Abstraction:** Hiding complex implementation details and showing only essential features.
+3.  **Inheritance:** Reusing code by allowing a new class to inherit properties from an existing one.
+4.  **Polymorphism:** Allowing a single interface/method to represent different underlying forms (data types).
 
-### Class and Object
-- **Class:** A blueprint or template for creating objects. It defines the state and behavior that the created objects will have.
-- **Object:** An instance of a class. It represents a real-world entity occupying memory.
+### 9.2 Classes and Objects
+*   **Class:** A blueprint or template for creating objects. It defines the attributes (data) and methods (behavior) that the objects will have.
+*   **Object:** A physical reality or instance of a class. It occupies memory.
 
-### The `__init__` Constructor and `self`
-The constructor is a special method called automatically when an object is instantiated. In Python, it is named `__init__`.
-The `self` parameter is a reference to the current instance of the class. It is used to access variables that belong to the class.
+#### Defining a Class and Creating an Object
+```python
+class Dog:
+    # Method definition
+    def bark(self):
+        print("Woof! Woof!")
 
+# Creating an Object (Instance)
+my_dog = Dog()
+my_dog.bark() # Method call
+```
+
+### 9.3 The `self` Keyword and Constructors
+
+#### The `self` Parameter
+Inside class methods, `self` represents the instance of the class. By using `self`, we can access the attributes and methods of the class. It MUST be the first parameter of any instance method.
+
+#### Constructors (`__init__`)
+A constructor is a special method used to initialize objects. In Python, the constructor is named `__init__()`. It is automatically called when an object is created.
 ```python
 class Student:
-    # Constructor
+    # Parameterized Constructor
     def __init__(self, name, roll_no):
         self.name = name       # Instance variable
         self.roll_no = roll_no # Instance variable
 
-    # Instance Method
-    def display_info(self):
-        print(f"Student: {self.name}, Roll No: {self.roll_no}")
+    def display(self):
+        print(f"Student Name: {self.name}, Roll No: {self.roll_no}")
 
-# Creating objects (Instantiating)
-s1 = Student("Alice", 101)
-s2 = Student("Bob", 102)
-
-s1.display_info()
+s1 = Student("Alice", 101) # __init__ is called automatically here
+s1.display()
 ```
 
----
-
-## 🧬 Section 2: Inheritance
-
-Inheritance allows a class (Child/Subclass) to inherit attributes and methods from another class (Parent/Superclass). It promotes **code reusability**.
-
-### Types of Inheritance
-1. **Single Inheritance:** One child inherits from one parent.
-2. **Multiple Inheritance:** One child inherits from MULTIPLE parents. (Python supports this, Java does not).
-3. **Multilevel Inheritance:** Child inherits from Parent, Parent inherits from Grandparent.
-4. **Hierarchical Inheritance:** Multiple children inherit from one parent.
-5. **Hybrid Inheritance:** A combination of the above.
-
-### Code Example: Multilevel Inheritance
+### 9.4 Instance vs. Class Variables
+*   **Instance Variables:** Variables attached to `self`. They are unique to each object.
+*   **Class Variables:** Variables declared directly inside the class but outside any methods. They are shared across all instances of the class.
 ```python
-class Animal:
-    def eat(self):
-        print("Eating...")
+class Employee:
+    company_name = "TechCorp" # Class Variable
 
-class Dog(Animal):
-    def bark(self):
-        print("Barking...")
-
-class Puppy(Dog):
-    def weep(self):
-        print("Weeping...")
-
-p = Puppy()
-p.eat()  # Inherited from Animal
-p.bark() # Inherited from Dog
-p.weep() # Its own method
-```
-
-### The `super()` Function
-`super()` is a built-in function that returns a proxy object that allows you to refer to the parent class. It is crucial for calling the parent's `__init__` constructor from the child class.
-
-```python
-class Person:
     def __init__(self, name):
-        self.name = name
+        self.name = name      # Instance Variable
 
-class Employee(Person):
-    def __init__(self, name, salary):
-        super().__init__(name) # Invokes Person's __init__
-        self.salary = salary
+emp1 = Employee("John")
+emp2 = Employee("Jane")
+print(emp1.company_name) # Shared by all: TechCorp
 ```
 
 ---
 
-## 🛡️ Section 3: Encapsulation and Information Hiding
+## Chapter 10: Encapsulation and Polymorphism
 
-Encapsulation is the bundling of data and the methods that act on that data into a single unit (the class). It also involves restricting direct access to some of an object's components (**Information Hiding**).
+### 10.1 Encapsulation and Information Hiding
+Encapsulation is the bundling of data and the methods that operate on that data. It restricts direct access to some of an object's components, which is crucial for preventing accidental interference and misuse (Information Hiding).
 
-Python does not have strict access modifiers like `public`, `private`, or `protected`. Instead, it uses naming conventions:
-- `public_var`: Public (accessible everywhere).
-- `_protected_var`: Protected (convention implies it's internal, but still accessible).
-- `__private_var`: Private. Triggers **Name Mangling**. Python changes the variable name to `_ClassName__private_var` to prevent accidental access.
+In Python, access modifiers are implemented via naming conventions:
+*   **Public:** Accessible from anywhere. (e.g., `name`)
+*   **Protected:** Intended for internal use and by subclasses. Prefixed with a single underscore. (e.g., `_age`)
+*   **Private:** Strictly inaccessible from outside the class. Prefixed with a double underscore. (e.g., `__salary`)
 
 ```python
 class BankAccount:
     def __init__(self, balance):
         self.__balance = balance # Private variable
 
-    # Getter method
-    def get_balance(self):
+    def get_balance(self):       # Getter method (Public access point)
         return self.__balance
 
-    # Setter method
-    def deposit(self, amount):
-        if amount > 0:
-            self.__balance += amount
+acc = BankAccount(1000)
+# print(acc.__balance)       # AttributeError: 'BankAccount' object has no attribute '__balance'
+print(acc.get_balance())     # 1000
+```
+*Note: Python implements privacy via "Name Mangling". `__balance` becomes `_BankAccount__balance` internally.*
 
-account = BankAccount(1000)
-# print(account.__balance) # ERROR: AttributeError
-print(account.get_balance()) # Safe access: 1000
+### 10.2 Polymorphism
+Polymorphism means "many forms". It allows different objects to respond to the same method call in their own way.
+
+#### 1. Duck Typing
+"If it walks like a duck and quacks like a duck, it must be a duck." Python doesn't check the type of the object, only if it has the required methods.
+
+#### 2. Method Overriding
+Occurs when a child class provides a specific implementation of a method that is already provided by its parent class.
+```python
+class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Cat(Animal):
+    def speak(self): # Overriding the parent's method
+        print("Meow")
+
+c = Cat()
+c.speak() # Output: Meow
 ```
 
----
-
-## 🎭 Section 4: Polymorphism
-
-Polymorphism means "many forms". It occurs when we have many classes that are related to each other by inheritance or share a common interface.
-
-### Method Overriding (Run-time Polymorphism)
-When a child class provides a specific implementation of a method that is already provided by its parent class.
+#### 3. Method Overloading
+Python does **NOT** support traditional method overloading (having multiple methods with the same name but different parameters). However, we can simulate it using default arguments.
 ```python
-class Bird:
-    def sound(self):
-        print("Some bird sound")
-
-class Duck(Bird):
-    def sound(self):
-        print("Quack Quack") # Overrides parent method
-
-d = Duck()
-d.sound() # Output: Quack Quack
-```
-
-### Method Overloading (Compile-time Polymorphism)
-Python **DOES NOT** natively support method overloading (having multiple methods with the same name but different parameters). If you define a method twice, the latest definition overrides the previous one. We achieve overloading using default arguments or variable-length arguments (`*args`).
-```python
-class MathOp:
-    def add(self, a, b, c=0):
+class Calculator:
+    def add(self, a, b, c=0): # Simulates overloading
         return a + b + c
 
-m = MathOp()
-print(m.add(2, 3))    # Output: 5
-print(m.add(2, 3, 4)) # Output: 9
+calc = Calculator()
+print(calc.add(2, 3))    # 5
+print(calc.add(2, 3, 4)) # 9
 ```
 
-### Operator Overloading
-Giving extended meaning beyond their predefined operational meaning. For example, `+` adds integers but concatenates strings. We can use Magic/Dunder methods to overload operators for custom classes.
+#### 4. Operator Overloading
+We can give extended meaning to standard operators (like `+`, `-`, `*`) for user-defined classes by overriding special "Magic Methods" or "Dunder (Double Under) Methods".
+*   `__add__(self, other)` for `+`
+*   `__sub__(self, other)` for `-`
+*   `__str__(self)` for `print()` string representation.
 ```python
 class Point:
     def __init__(self, x, y):
-        self.x, self.y = x, y
-        
-    def __add__(self, other_point):
-        return Point(self.x + other_point.x, self.y + other_point.y)
+        self.x = x
+        self.y = y
+
+    def __add__(self, other): # Overloading the '+' operator
+        return Point(self.x + other.x, self.y + other.y)
+
+    def __str__(self):        # Overloading string representation
+        return f"({self.x}, {self.y})"
 
 p1 = Point(1, 2)
 p2 = Point(3, 4)
-p3 = p1 + p2 # Calls p1.__add__(p2)
-print(f"X: {p3.x}, Y: {p3.y}") # Output: X: 4, Y: 6
+p3 = p1 + p2 # Python calls p1.__add__(p2) behind the scenes
+print(p3)    # Output: (4, 6)
 ```
 
 ---
 
-## 🧩 Section 5: Abstract Method and Class
+## Chapter 11: Inheritance and Abstraction
 
-An abstract class is a blueprint for other classes. It allows you to create a set of methods that must be created within any child classes built from the abstract class.
-Python uses the `abc` (Abstract Base Classes) module for this.
-- Abstract classes cannot be instantiated (you cannot create objects from them).
-- Abstract methods have no body (`pass`).
+### 11.1 Inheritance
+Inheritance allows us to define a class that inherits all the methods and properties from another class.
+*   **Parent Class (Base/Super Class):** The class being inherited from.
+*   **Child Class (Derived/Sub Class):** The class that inherits.
 
+#### Types of Inheritance
+1.  **Single Inheritance:** One child inherits from one parent.
+2.  **Multiple Inheritance:** One child inherits from multiple parents.
+    ```python
+    class Father: pass
+    class Mother: pass
+    class Child(Father, Mother): pass # Multiple
+    ```
+3.  **Multilevel Inheritance:** A child inherits from a parent, and then another child inherits from that child.
+4.  **Hierarchical Inheritance:** Multiple children inherit from one parent.
+5.  **Hybrid Inheritance:** A combination of the above.
+
+#### The `super()` Function
+`super()` returns a temporary object of the superclass that allows you to call its methods. Crucial for accessing the parent's constructor.
+```python
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+class Employee(Person):
+    def __init__(self, name, emp_id):
+        super().__init__(name) # Call parent's constructor
+        self.emp_id = emp_id
+```
+
+### 11.2 Abstract Classes and Methods
+An abstract class is a blueprint for other classes. It cannot be instantiated directly. An abstract method is a method that is declared but contains no implementation. Subclasses MUST override abstract methods.
+Python provides the `abc` (Abstract Base Classes) module for this.
 ```python
 from abc import ABC, abstractmethod
 
-class Shape(ABC):
+class Shape(ABC): # Inherits from ABC to become an Abstract Class
     @abstractmethod
     def area(self):
-        pass
+        pass # No implementation
 
-class Circle(Shape):
-    def __init__(self, radius):
-        self.radius = radius
-        
-    def area(self): # MUST implement this, otherwise Error
-        return 3.14 * self.radius * self.radius
+class Rectangle(Shape):
+    def __init__(self, l, b):
+        self.l = l
+        self.b = b
 
-# s = Shape() # ERROR: Can't instantiate abstract class
-c = Circle(5)
-print(c.area())
+    def area(self): # MUST implement the abstract method
+        return self.l * self.b
+
+# s = Shape() # ERROR: Cannot instantiate abstract class
+r = Rectangle(10, 5)
+print(r.area())
 ```
 
 ---
 
-## ⚙️ Section 6: Standard Libraries in OOP & Full Operator Overloading (Lab Prerequisites)
+## Chapter 12: Exception Handling
 
-### Comprehensive Operator Overloading
-Your labs require full mathematical overloading for custom classes like `Fraction` or `Complex`.
-- `__add__(self, other)`: Addition `+`
-- `__sub__(self, other)`: Subtraction `-`
-- `__mul__(self, other)`: Multiplication `*`
-- `__truediv__(self, other)`: Division `/`
-- `__lt__(self, other)`: Less than `<`
-- `__eq__(self, other)`: Equal to `==`
+### 12.1 Errors vs. Exceptions
+*   **Syntax Errors:** Errors caused by not following the proper structure (syntax) of the language. Detected before execution.
+*   **Exceptions:** Errors that occur *during runtime* (e.g., dividing by zero, reading a missing file). If unhandled, they crash the program.
+
+### 12.2 Handling Exceptions: `try`, `except`, `else`, `finally`
+You can handle exceptions to prevent program crashes.
+*   **`try`:** Block of code to be attempted (which might raise an exception).
+*   **`except`:** Block of code to handle the exception if one occurs.
+*   **`else`:** Executed ONLY IF no exceptions were raised in the try block.
+*   **`finally`:** ALWAYS executed, regardless of whether an exception occurred or not. Crucial for cleanup (like closing files/connections).
 
 ```python
-class Fraction:
-    def __init__(self, num, denom):
-        self.num = num
-        self.denom = denom
-        
-    def __mul__(self, other):
-        return Fraction(self.num * other.num, self.denom * other.denom)
+try:
+    x = int(input("Enter numerator: "))
+    y = int(input("Enter denominator: "))
+    result = x / y
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero!")
+except ValueError:
+    print("Error: Please enter valid integers!")
+else:
+    print(f"Result is {result}") # Runs if no error
+finally:
+    print("Execution complete. Cleaning up...") # ALWAYS runs
 ```
 
-### Using `datetime` and `random` inside Classes
-Labs often ask you to calculate ages or random data.
+### 12.3 The `assert` Statement
+Assertions are debugging aids that test a condition. If the condition is True, the program continues. If False, it raises an `AssertionError`.
 ```python
-import datetime
-import random
-
-# Get today's date
-today = datetime.date.today()
-print(f"Today is {today.day}/{today.month}/{today.year}")
-
-# Generate random points
-random_x = random.randint(1, 100)
+def calculate_age(year_born):
+    age = 2024 - year_born
+    assert age >= 0, "Age cannot be negative!" # Triggers if year_born > 2024
+    return age
 ```
 
 ---
 
-## 📝 EXAM QUESTION BANK & SOLUTIONS
+## 📝 Comprehensive Textbook Exercises and Solutions
 
-**Q1. What is the difference between Class Variables and Instance Variables?**
-**Answer:** Class variables are defined within the class construction but outside any methods, and they are shared among all instances of that class. Instance variables are defined within methods (usually `__init__`) and belong exclusively to a specific object.
+### Conceptual Questions
 
-**Q2. Does Python support Multiple Inheritance? How does it resolve conflicts if two parents have a method with the same name?**
-**Answer:** Yes, Python supports Multiple Inheritance. It resolves method conflicts using Method Resolution Order (MRO) via the C3 Linearization algorithm. It searches the class hierarchy from left to right, depth-first.
+**Q1. Define Encapsulation and explain how Python achieves it.**
+*Answer:* Encapsulation is the concept of bundling data (attributes) and methods that operate on that data into a single unit (a class). It also involves hiding the internal state of the object. Python achieves this using naming conventions: prefixing an attribute with an underscore `_` makes it protected (by convention), and a double underscore `__` makes it strictly private via name mangling.
 
-**Q3. Write a program to overload the `>` operator to compare two student objects based on their marks.**
+**Q2. What is Method Overriding? Give a real-world analogy.**
+*Answer:* Method overriding is a polymorphism concept where a subclass provides its own specific implementation of a method that is already defined in its superclass. *Analogy:* A `Vehicle` parent class might have a generic `start_engine()` method. A `ElectricCar` subclass inherits `Vehicle` but overrides `start_engine()` because starting an electric motor is fundamentally different from a combustion engine.
+
+**Q3. Differentiate between `Exception` and `Syntax Error`.**
+*Answer:* A Syntax Error happens during the parsing phase before execution, caused by invalid code structure (like a missing colon). An Exception occurs during runtime when syntactically correct code fails due to invalid operations (like dividing by zero or accessing an out-of-bounds index).
+
+**Q4. Why is the `finally` block useful?**
+*Answer:* The `finally` block guarantees execution regardless of whether a `try` block succeeds, fails, or even has a `return` statement inside it. It is essential for releasing external resources, such as closing open files, closing database connections, or releasing network sockets, preventing memory/resource leaks.
+
+**Q5. Explain Multiple Inheritance and the Diamond Problem.**
+*Answer:* Multiple inheritance is when a class inherits from more than one parent class. The Diamond Problem occurs when two parent classes inherit from the same grandparent class, and the child class inherits from both parents. If the grandparent has a method that both parents override, Python needs to decide which parent's method to use in the child. Python solves this using Method Resolution Order (MRO).
+
+### Programming Problems
+
+**P1. Create a class `Complex` that overloads the `+` operator to add two complex numbers.**
 ```python
-class Student:
-    def __init__(self, name, marks):
+class Complex:
+    def __init__(self, real, imag):
+        self.real = real
+        self.imag = imag
+
+    def __add__(self, other):
+        # Adds corresponding real and imaginary parts
+        return Complex(self.real + other.real, self.imag + other.imag)
+
+    def __str__(self):
+        # Format for printing
+        return f"{self.real} + {self.imag}i"
+
+c1 = Complex(2, 3)
+c2 = Complex(4, 5)
+c3 = c1 + c2 # Calls c1.__add__(c2)
+print(f"Sum is: {c3}") # Output: 6 + 8i
+```
+
+**P2. Implement a simple class hierarchy demonstrating Multilevel Inheritance and the `super()` keyword.**
+```python
+class Person:
+    def __init__(self, name):
         self.name = name
-        self.marks = marks
-        
-    def __gt__(self, other):
-        return self.marks > other.marks
 
-s1 = Student("Alice", 90)
-s2 = Student("Bob", 85)
-print("Alice > Bob:", s1 > s2) # True
+class Student(Person):
+    def __init__(self, name, student_id):
+        super().__init__(name) # Initialize parent's name
+        self.student_id = student_id
+
+class GraduateStudent(Student):
+    def __init__(self, name, student_id, thesis_topic):
+        super().__init__(name, student_id) # Initialize parent's variables
+        self.thesis_topic = thesis_topic
+
+    def display(self):
+        print(f"Name: {self.name}, ID: {self.student_id}, Thesis: {self.thesis_topic}")
+
+g = GraduateStudent("Alice", "S101", "Quantum Computing")
+g.display()
 ```
 
-**Q4. Explain Duck Typing in Python.**
-**Answer:** Duck Typing is a concept related to dynamic typing, where the type or class of an object is less important than the methods it defines. "If it walks like a duck and quacks like a duck, it must be a duck." You don't need to check the object's type, just if it has the required method.
-
-**Q5. Write a class `Rectangle` with private attributes `__length` and `__width`. Provide getter and setter methods to access and modify them, and a method to calculate the area.**
+**P3. Write a program that asks the user to input a file name. Use exception handling to catch the error if the file does not exist.**
 ```python
-class Rectangle:
-    def __init__(self, length, width):
-        self.__length = length
-        self.__width = width
-        
-    def get_length(self):
-        return self.__length
-        
-    def set_length(self, length):
-        if length > 0: self.__length = length
-        
-    def get_width(self):
-        return self.__width
-        
-    def set_width(self, width):
-        if width > 0: self.__width = width
-        
-    def calculate_area(self):
-        return self.__length * self.__width
-
-rect = Rectangle(10, 5)
-rect.set_length(15)
-print("Area:", rect.calculate_area()) # Area: 75
+filename = input("Enter filename to open: ")
+try:
+    file = open(filename, 'r')
+    content = file.read()
+    print("File content read successfully.")
+    file.close()
+except FileNotFoundError:
+    print(f"Error: The file '{filename}' was not found in the directory.")
+except Exception as e:
+    # A generic catch block for any other unforeseen errors
+    print(f"An unexpected error occurred: {e}")
 ```
 
-**Q6. What are Magic Methods (Dunder Methods)? Name three.**
-**Answer:** Magic methods are special methods with double underscores at the beginning and end of their names. They are invoked internally by Python during certain operations. Examples: `__init__` (initialization), `__str__` (string representation), `__add__` (operator overloading for `+`).
-
-**Q7. Create an Abstract Base Class `Vehicle` with an abstract method `start()`. Inherit a class `Car` from it and implement the method.**
+**P4. Write a Python program using an Abstract Base Class `Employee` with an abstract method `calculate_salary()`. Implement it in subclasses `FullTimeEmployee` and `PartTimeEmployee`.**
 ```python
 from abc import ABC, abstractmethod
 
-class Vehicle(ABC):
+class Employee(ABC):
+    def __init__(self, name):
+        self.name = name
+
     @abstractmethod
-    def start(self):
+    def calculate_salary(self):
         pass
 
-class Car(Vehicle):
-    def start(self):
-        print("Car engine starting with a key.")
+class FullTimeEmployee(Employee):
+    def __init__(self, name, monthly_salary):
+        super().__init__(name)
+        self.monthly_salary = monthly_salary
 
-my_car = Car()
-my_car.start()
+    def calculate_salary(self):
+        return self.monthly_salary
+
+class PartTimeEmployee(Employee):
+    def __init__(self, name, hours_worked, hourly_rate):
+        super().__init__(name)
+        self.hours_worked = hours_worked
+        self.hourly_rate = hourly_rate
+
+    def calculate_salary(self):
+        return self.hours_worked * self.hourly_rate
+
+ft = FullTimeEmployee("Alice", 5000)
+pt = PartTimeEmployee("Bob", 80, 20)
+
+print(f"{ft.name}'s Salary: ${ft.calculate_salary()}")
+print(f"{pt.name}'s Salary: ${pt.calculate_salary()}")
 ```
 
-**Q8. Why do we use Name Mangling in Python?**
-**Answer:** We use double underscores (`__var`) to trigger name mangling, which changes the internal name of the variable to `_ClassName__var`. This is done to prevent accidental overriding of private attributes by subclasses, acting as a form of encapsulation.
-
-**Q9. What is `self`? Can we use another word instead of `self`?**
-**Answer:** `self` represents the instance of the class. By using the "self" keyword, we can access the attributes and methods of the class in python. It binds the attributes with the given arguments. Yes, `self` is not a reserved keyword, you can use any word (like `this`), but `self` is an unbreakable convention.
-
-**Q10. Write a code snippet demonstrating Hierarchical Inheritance.**
+**P5. Write a custom exception class `NegativeAgeError` and raise it if a user enters a negative age.**
 ```python
-class Parent:
-    def show_parent(self): print("Parent Class")
+# Defining a Custom Exception
+class NegativeAgeError(Exception):
+    def __init__(self, message="Age cannot be negative"):
+        self.message = message
+        super().__init__(self.message)
 
-class Child1(Parent):
-    def show_child1(self): print("Child 1 Class")
+def set_age(age):
+    if age < 0:
+        raise NegativeAgeError(f"Provided age {age} is invalid.")
+    print(f"Age is set to {age}")
 
-class Child2(Parent):
-    def show_child2(self): print("Child 2 Class")
-
-c1 = Child1()
-c1.show_parent() # Inherits from Parent
-c2 = Child2()
-c2.show_parent() # Inherits from Parent
+try:
+    set_age(-5)
+except NegativeAgeError as e:
+    print(f"Caught an exception: {e}")
 ```

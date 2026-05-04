@@ -1,291 +1,346 @@
-# 📘 The Ultimate Master Guide: Module 2 - Data Structures, Functions & Modules
+# 📘 Comprehensive Textbook Guide: Module 2 - Data Structures, Functions & Modules
 
----
+## Chapter 5: Linear Data Structures - Lists and Tuples
 
-## 📚 Section 1: Data Structures - Lists
-A List is an ordered, mutable (changeable) collection of elements. It can contain duplicate values and heterogeneous data types (integers, strings, etc., mixed together).
-Under the hood, Lists are **Dynamic Arrays**.
+### 5.1 Introduction to Data Structures
+A data structure is a specialized format for organizing, processing, retrieving, and storing data. Python provides four built-in, highly optimized data structures: Lists, Tuples, Dictionaries, and Sets.
 
-### List Creation and Accessing
+### 5.2 Lists
+A List is an ordered, mutable (changeable) collection of elements. It can contain duplicate values and heterogeneous data types (e.g., integers, strings, and other lists mixed together). Internally, Python lists are implemented as **Dynamic Arrays**.
+
+#### Creating Lists and Accessing Elements
+Lists are created using square brackets `[]` or the `list()` constructor.
 ```python
 my_list = [10, "Apple", 3.14, True]
-print(my_list[1])    # Output: Apple
-print(my_list[-1])   # Output: True (Negative indexing accesses from the end)
+print(my_list[0])    # Access first element: 10
+print(my_list[-1])   # Access last element using negative indexing: True
 ```
 
-### List Slicing
-Extracting a portion of the list. `list[start:stop:step]`.
+#### List Slicing
+Slicing allows you to extract a sublist. The syntax is `list[start : stop : step]`.
+*   `start`: Starting index (inclusive). Defaults to 0.
+*   `stop`: Ending index (exclusive). Defaults to length of list.
+*   `step`: Amount by which the index increases. Defaults to 1.
 ```python
-nums = [0, 1, 2, 3, 4, 5]
-print(nums[1:4])     # [1, 2, 3]
-print(nums[::-1])    # [5, 4, 3, 2, 1, 0] (Reverses the list)
+nums = [0, 10, 20, 30, 40, 50]
+print(nums[1:4])     # [10, 20, 30]
+print(nums[::2])     # [0, 20, 40] (Every second element)
+print(nums[::-1])    # [50, 40, 30, 20, 10, 0] (Reverses the list)
 ```
 
-### Built-in List Functions/Methods
-- **Adding elements:**
-  - `append(x)`: Adds `x` to the end of the list. O(1) time complexity.
-  - `insert(i, x)`: Inserts `x` at index `i`. O(N) because elements shift right.
-  - `extend(iterable)`: Appends elements from another iterable.
-- **Removing elements:**
-  - `remove(x)`: Removes the first occurrence of value `x`.
-  - `pop(i)`: Removes and returns the element at index `i` (defaults to last element).
-  - `clear()`: Removes all items.
-- **Other utilities:**
-  - `index(x)`: Returns the first index of `x`.
-  - `count(x)`: Returns the number of times `x` appears.
-  - `sort()`: Sorts the list in ascending order *in-place*.
-  - `reverse()`: Reverses the elements *in-place*.
+#### Built-in List Functions/Methods
+1.  **Adding Elements:**
+    *   `append(item)`: Adds a single item to the end. Time complexity is $O(1)$.
+    *   `insert(index, item)`: Inserts an item at a specific index. Shifts elements to the right $O(N)$.
+    *   `extend(iterable)`: Appends elements from another iterable (like another list) to the end.
+2.  **Removing Elements:**
+    *   `remove(item)`: Removes the *first occurrence* of the specified item. Throws `ValueError` if not found.
+    *   `pop(index)`: Removes and returns the item at the given index. If no index is specified, removes and returns the last item.
+    *   `clear()`: Empties the entire list.
+3.  **Other Operations:**
+    *   `index(item)`: Returns the index of the first occurrence of the item.
+    *   `count(item)`: Returns the number of times the item appears in the list.
+    *   `sort(key=None, reverse=False)`: Sorts the list *in-place*.
+    *   `reverse()`: Reverses the elements of the list *in-place*.
 
-### List Comprehension
-An elegant way to create new lists based on existing iterables.
+#### List Comprehension
+A concise, highly optimized way to create lists from existing iterables.
+**Syntax:** `[expression for item in iterable if condition]`
 ```python
-# Create a list of squares for even numbers only
+# Create a list of squares for even numbers from 0 to 9
 squares = [x**2 for x in range(10) if x % 2 == 0]
-print(squares) # [0, 4, 16, 36, 64]
+# Result: [0, 4, 16, 36, 64]
 ```
 
----
+### 5.3 Tuples
+Tuples are ordered collections, practically identical to lists, EXCEPT they are **Immutable** (they cannot be modified after creation). This immutability makes them faster than lists and allows them to be used as keys in dictionaries.
 
-## 📦 Section 2: Data Structures - Tuples
-Tuples are ordered collections, identical to lists, EXCEPT they are **Immutable** (cannot be modified after creation).
-Because of immutability, Tuples are faster than Lists and can be used as keys in Dictionaries.
-
-### Tuple Creation and Operations
+#### Creating and Accessing Tuples
+Created using parentheses `()` or simply separating values by commas (Tuple Packing).
 ```python
 t1 = (1, 2, 3)
-t2 = 1, 2, 3       # Parentheses are optional (Tuple Packing)
-single_tuple = (5,)# MUST have a comma, otherwise it's just an int
-
-# Unpacking
-a, b, c = t1       # a=1, b=2, c=3
+t2 = 10, 20, 30      # Tuple Packing
+t3 = (5,)            # A single-element tuple MUST have a trailing comma
 ```
-- **Built-in Functions:** Tuples only support `count()` and `index()` because they cannot be modified.
+
+#### Operations Using Built-in Tuple Functions
+Since tuples cannot be modified (no `append`, `remove`, `sort`), they only support two main methods:
+1.  `count(item)`: Returns occurrences of `item`.
+2.  `index(item)`: Returns the first index of `item`.
+
+*Note: You can concatenate tuples using `+` and repeat them using `*`, which creates a entirely new tuple.*
 
 ---
 
-## 📖 Section 3: Data Structures - Dictionaries
-Dictionaries are unordered (ordered in Python 3.7+), mutable collections of Key-Value pairs. They are implemented using **Hash Tables**, making lookups O(1) fast.
-**Rules for Keys:** Keys must be Immutable (Strings, Numbers, Tuples). Lists cannot be keys.
+## Chapter 6: Non-Linear Data Structures - Dictionaries and Sets
 
-### Accessing and Modifying
+### 6.1 Dictionaries
+Dictionaries are mutable, dynamic collections that store data in **Key-Value pairs**. They are implemented as **Hash Tables**, making data retrieval extremely fast — $O(1)$ on average.
+*Rules for Keys:* Keys must be immutable types (e.g., Strings, Numbers, Tuples). Lists or other dictionaries cannot be keys.
+
+#### Creating and Accessing Values
 ```python
-student = {"name": "John", "age": 20, "grades": [90, 85]}
+student = {"roll": 101, "name": "Alice", "marks": 95.5}
 
 # Accessing
-print(student["name"])          # Output: John (Throws KeyError if key doesn't exist)
-print(student.get("city", "NY"))# Safe access. Returns "NY" if "city" is not found.
+print(student["name"])          # Output: Alice (Throws KeyError if key is missing)
+print(student.get("city", "N/A"))# Safe access. Returns "N/A" if "city" is missing.
 
 # Adding / Updating
-student["age"] = 21             # Updates age
-student["city"] = "Boston"      # Adds new key-value pair
+student["marks"] = 98           # Updates the existing key
+student["grade"] = "O"          # Adds a new key-value pair
 ```
 
-### Built-in Dictionary Functions
-- `keys()`: Returns a view object of all keys.
-- `values()`: Returns a view object of all values.
-- `items()`: Returns a view object of (key, value) tuples.
-- `pop(key)`: Removes the specified key and returns its value.
-- `update(dict2)`: Merges dict2 into the dictionary.
+#### Built-in Dictionary Functions
+*   `keys()`: Returns a view object of all keys.
+*   `values()`: Returns a view object of all values.
+*   `items()`: Returns a view object of tuple pairs `(key, value)`.
+*   `pop(key)`: Removes the key and returns its value.
+*   `popitem()`: Removes and returns the last inserted key-value pair.
+*   `update(other_dict)`: Merges another dictionary into the current one.
 
----
+### 6.2 Sets
+A Set is an unordered, mutable collection of **unique** elements. It is highly optimized for checking membership and performing mathematical set operations.
 
-## 🎯 Section 4: Data Structures - Sets
-A Set is an unordered collection of **unique** elements. It is heavily used for mathematical set operations and removing duplicates from a list.
-
-### Set Operations
+#### Set Operations
 ```python
 setA = {1, 2, 3, 4}
 setB = {3, 4, 5, 6}
 
+# Mathematical Operations
 print(setA | setB) # Union: {1, 2, 3, 4, 5, 6}
 print(setA & setB) # Intersection: {3, 4}
-print(setA - setB) # Difference: {1, 2} (In A, but not B)
-print(setA ^ setB) # Symmetric Difference: {1, 2, 5, 6} (In either, but not both)
+print(setA - setB) # Difference (in A, not in B): {1, 2}
+print(setA ^ setB) # Symmetric Difference (in A or B, but not both): {1, 2, 5, 6}
 
-setA.add(9)        # Adds 9
-setA.discard(10)   # Safely removes 10 (does not throw error if 10 isn't there)
+# Set Methods
+setA.add(9)        # Adds an element
+setA.remove(1)     # Removes element. Throws KeyError if missing.
+setA.discard(10)   # Safely removes element. Does nothing if missing.
 ```
 
 ---
 
-## ⚙️ Section 5: Functions, Recursion, and Anonymous Functions
+## Chapter 7: Functions, Scope, and Recursion
 
-### Functions
-Blocks of reusable code defined using the `def` keyword.
-- **Positional vs Keyword Arguments:**
-  ```python
-  def greet(name, msg):
-      print(f"{msg}, {name}")
+### 7.1 Functions
+A function is a block of organized, reusable code that performs a single, related action. It provides better modularity and code reusability. Defined using the `def` keyword.
 
-  greet("Alice", "Hi")          # Positional
-  greet(msg="Hello", name="Bob")# Keyword (Order doesn't matter)
-  ```
-- **Default Arguments:** `def greet(name, msg="Hello"):`
-
-### Variable Length Arguments (`*args` and `**kwargs`)
-- `*args`: Collects extra positional arguments into a Tuple.
-- `**kwargs`: Collects extra keyword arguments into a Dictionary.
+#### Defining and Calling Functions
 ```python
-def info(*args, **kwargs):
-    print("Args tuple:", args)
-    print("Kwargs dict:", kwargs)
+def greet():              # Definition
+    print("Hello World!")
 
-info(1, 2, 3, name="Alice", age=25)
+greet()                   # Calling
 ```
 
-### Recursion
-A function calling itself. Must have a base condition to prevent infinite loops (StackOverflow).
+#### Passing Arguments
+1.  **Positional Arguments:** Arguments passed in the exact order as defined.
+2.  **Keyword Arguments:** Arguments passed by explicitly naming the parameter, allowing you to ignore the order.
+    ```python
+    def display_info(name, age):
+        print(f"Name: {name}, Age: {age}")
+        
+    display_info(age=25, name="John") # Keyword arguments
+    ```
+3.  **Default Arguments:** Parameters that assume a default value if a value is not provided in the function call.
+    ```python
+    def power(base, exponent=2):
+        return base ** exponent
+    ```
+
+#### Variable-Length Arguments
+Sometimes you don't know how many arguments will be passed.
+*   `*args` (Non-Keyword Arguments): Gathers remaining positional arguments into a **Tuple**.
+*   `**kwargs` (Keyword Arguments): Gathers remaining keyword arguments into a **Dictionary**.
+```python
+def student_data(name, *args, **kwargs):
+    print(f"Name: {name}")
+    print(f"Scores (Tuple): {args}")
+    print(f"Details (Dict): {kwargs}")
+
+student_data("Alice", 90, 85, 88, city="NY", grade="A")
+```
+
+### 7.2 Scope of Variables (Local vs. Global)
+*   **Local Variables:** Defined *inside* a function. They can only be accessed within that specific function.
+*   **Global Variables:** Defined *outside* all functions. They can be read by any function in the module.
+*   **The `global` Keyword:** If you want to *modify* a global variable from inside a function, you must declare it using the `global` keyword.
+```python
+count = 10  # Global variable
+
+def increment():
+    global count
+    count += 1  # Modifying global variable
+
+increment()
+print(count)    # 11
+```
+
+### 7.3 Recursion
+Recursion occurs when a function calls itself. A recursive function must have two parts:
+1.  **Base Case:** A condition that stops the recursion to prevent an infinite loop (which causes a `RecursionError` or Stack Overflow).
+2.  **Recursive Step:** The part where the function calls itself with a modified parameter moving towards the base case.
 ```python
 def factorial(n):
-    if n == 0 or n == 1: # Base Case
+    if n == 0 or n == 1:  # Base case
         return 1
-    else:                # Recursive Step
-        return n * factorial(n - 1)
-```
-
-### Anonymous Functions (Lambda)
-Functions without a name, created using the `lambda` keyword. Used for small, one-line operations.
-**Syntax:** `lambda arguments: expression`
-```python
-square = lambda x: x * x
-print(square(5)) # Output: 25
-
-# Often used with map/filter
-nums = [1, 2, 3, 4]
-doubles = list(map(lambda x: x * 2, nums))
-```
-
----
-
-## 📁 Section 6: Modules and Packages
-
-### Modules
-A module is simply a Python file containing variables, functions, and classes. It allows you to logically organize your code.
-- **Importing:**
-  ```python
-  import math
-  print(math.sqrt(16))
-  
-  from math import pi, factorial
-  print(pi)
-  ```
-
-### Packages
-A package is a folder that contains multiple modules and a special `__init__.py` file. The `__init__.py` file tells the Python interpreter to treat the folder as a package.
-
----
-
-## 🛠️ Section 7: Essential Built-in Modules & Advanced Sorting (Lab Prerequisites)
-To solve complex problems (like those in your labs), you must know these built-in functionalities:
-
-### The `math` Module
-Crucial for algorithms like finding prime numbers or simplifying fractions.
-```python
-import math
-print(math.gcd(10, 15))       # Greatest Common Divisor: 5
-print(math.hypot(3, 4))       # Distance from origin (Pythagorean): 5.0
-```
-
-### Advanced Slicing and String Methods
-- **Slicing by Steps:** `tup[::2]` gets every alternate element (e.g., removing elements at odd indices by keeping only even indices).
-- **String Case Counting:**
-```python
-s = "Hello World"
-upper_count = sum(1 for char in s if char.isupper())
-lower_count = sum(1 for char in s if char.islower())
-```
-
-### Sorting Collections of Collections
-How to sort a list of tuples based on the 3rd element of each tuple:
-```python
-students = [("Alice", 20, 85), ("Bob", 19, 90), ("Charlie", 21, 80)]
-# Sort descending by the 3rd element (index 2, which is marks)
-students.sort(key=lambda x: x[2], reverse=True)
-```
-
----
-
-## 📝 EXAM QUESTION BANK & SOLUTIONS
-
-**Q1. How do you remove duplicates from a list in one line of code?**
-```python
-my_list = [1, 2, 2, 3, 4, 4, 5]
-unique_list = list(set(my_list))
-print(unique_list) # [1, 2, 3, 4, 5]
-```
-
-**Q2. Explain the Mutable Default Argument Trap in Python with an example.**
-**Answer:** Default arguments are evaluated ONLY ONCE when the function is defined, not every time it's called. If the default argument is mutable (like a list), subsequent calls to the function will share the same list object.
-```python
-def append_item(item, target=[]):
-    target.append(item)
-    return target
-
-print(append_item(1)) # Output: [1]
-print(append_item(2)) # Output: [1, 2] (Error! It didn't start with a fresh list!)
-# Fix: Use target=None, and initialize target=[] inside the function.
-```
-
-**Q3. Write a recursive function to find the sum of a list of numbers.**
-```python
-def recursive_sum(num_list):
-    if len(num_list) == 0:
-        return 0
     else:
-        return num_list[0] + recursive_sum(num_list[1:])
-
-print(recursive_sum([1, 2, 3, 4])) # Output: 10
+        return n * factorial(n - 1)  # Recursive step
 ```
 
-**Q4. Write a program to merge two dictionaries.**
+### 7.4 Anonymous Functions (Lambda)
+Functions without a name, created using the `lambda` keyword. They can take any number of arguments but can only have **one single expression**.
+**Syntax:** `lambda arguments : expression`
 ```python
-dict1 = {'a': 1, 'b': 2}
-dict2 = {'c': 3, 'd': 4}
+square = lambda x: x ** 2
+print(square(5)) # 25
+```
+Lambdas are commonly used as arguments to higher-order functions like `map()`, `filter()`, and `sorted()`.
 
-# Method 1 (Python 3.5+ unpacking)
-merged = {**dict1, **dict2}
+---
 
-# Method 2 (Python 3.9+ union operator)
-merged_new = dict1 | dict2
-print(merged)
+## Chapter 8: Modules and Packages
+
+### 8.1 Modules
+A module is simply a file containing Python definitions, functions, classes, and variables. The file name is the module name with the suffix `.py` appended.
+*Why use modules?* They allow you to logically organize your Python code, grouping related code into a file, making it easier to understand and use.
+
+#### The `import` Statement
+You can bring a module's functionalities into your current script using `import`.
+1.  **Importing entire module:**
+    ```python
+    import math
+    print(math.sqrt(16))
+    ```
+2.  **Importing specific attributes:**
+    ```python
+    from math import pi, factorial
+    print(pi)
+    ```
+3.  **Importing with an alias:**
+    ```python
+    import math as m
+    print(m.pow(2, 3))
+    ```
+
+### 8.2 Creating Modules
+You can create your own module by simply saving code in a `.py` file.
+*File: `my_math.py`*
+```python
+def add(a, b):
+    return a + b
+```
+*File: `main.py`*
+```python
+import my_math
+print(my_math.add(5, 10))
 ```
 
-**Q5. What is the output of `x = (1, 2, 3); x[0] = 5`?**
-**Answer:** It throws a `TypeError: 'tuple' object does not support item assignment`. Tuples are immutable and their elements cannot be changed after creation.
-
-**Q6. Write a list comprehension that extracts all words starting with 'p' from a given string.**
-```python
-text = "python is powerful and programming is fun"
-p_words = [word for word in text.split() if word.startswith('p')]
-print(p_words) # ['python', 'powerful', 'programming']
+### 8.3 Packages
+A package is a hierarchical file directory structure that defines a single Python application environment containing modules, sub-packages, and so on.
+To be recognized as a package, a directory MUST contain a special file named `__init__.py` (it can be completely empty).
+```text
+my_package/
+    __init__.py
+    module1.py
+    module2.py
 ```
+You can import from it using dot notation: `from my_package import module1`.
 
-**Q7. Differentiate between `append()` and `extend()` list methods.**
-**Answer:** `append(item)` adds its argument as a *single element* to the end of the list. `extend(iterable)` iterates over its argument adding *each element* to the list.
-```python
-lst = [1, 2]
-lst.append([3, 4]) # [1, 2, [3, 4]]
-lst.extend([5, 6]) # [1, 2, [3, 4], 5, 6]
-```
+---
 
-**Q8. Write a function that accepts any number of arguments and returns their product.**
+## 📝 Comprehensive Textbook Exercises and Solutions
+
+### Conceptual Questions
+
+**Q1. What is the difference between a List and a Tuple in Python?**
+*Answer:* The primary difference is mutability. Lists are mutable (they can be modified, appended to, sorted in-place), whereas Tuples are immutable (once created, their elements cannot be changed, added, or removed). Lists use square brackets `[]`, and tuples use parentheses `()`. Because of immutability, tuples are generally faster and can be used as dictionary keys.
+
+**Q2. Explain Dictionary Comprehension with an example.**
+*Answer:* Similar to list comprehension, it's a concise way to create dictionaries. Syntax: `{key: value for item in iterable}`.
+*Example:* `{x: x**2 for x in range(1, 4)}` creates `{1: 1, 2: 4, 3: 9}`.
+
+**Q3. What is the Mutable Default Argument Trap?**
+*Answer:* If you use a mutable object (like a list or dictionary) as a default argument in a function, it is evaluated ONLY ONCE when the function is defined. Subsequent calls to the function will share the exact same object in memory, leading to unexpected behavior.
+*Fix:* Use `None` as the default, and initialize the list inside the function.
+
+**Q4. Differentiate between `discard()` and `remove()` methods in Sets.**
+*Answer:* Both remove an element from a set. However, if the element does not exist, `remove()` raises a `KeyError`, whereas `discard()` does nothing and the program continues execution.
+
+**Q5. What is the purpose of `__init__.py` in a Python package?**
+*Answer:* It tells the Python interpreter to treat the directory it resides in as a Python package. It can be empty, or it can execute initialization code for the package or set the `__all__` variable to control what gets imported when `from package import *` is used.
+
+### Programming Problems
+
+**P1. Write a function to remove duplicates from a list while preserving the original order.**
+*Textbook Note: Simply converting to a `set` removes duplicates but destroys the order.*
 ```python
-def multiply_all(*args):
-    result = 1
-    for num in args:
-        result *= num
+def remove_duplicates_preserve_order(lst):
+    seen = set()
+    result = []
+    for item in lst:
+        if item not in seen:
+            seen.add(item)
+            result.append(item)
     return result
 
-print(multiply_all(2, 3, 4)) # Output: 24
+print(remove_duplicates_preserve_order([1, 2, 2, 3, 1, 4, 5, 4])) 
+# Output: [1, 2, 3, 4, 5]
 ```
 
-**Q9. How do you sort a dictionary by its values instead of keys?**
+**P2. Write a recursive function to compute the Nth Fibonacci number.**
 ```python
-marks = {'Physics': 67, 'Maths': 87, 'History': 75}
-# Sort using a lambda function targeting the value (item[1])
-sorted_marks = dict(sorted(marks.items(), key=lambda item: item[1]))
-print(sorted_marks) # {'Physics': 67, 'History': 75, 'Maths': 87}
+def fibonacci(n):
+    if n < 0:
+        return "Incorrect input"
+    elif n == 0:
+        return 0
+    elif n == 1 or n == 2:
+        return 1
+    else:
+        # Recursive step
+        return fibonacci(n-1) + fibonacci(n-2)
+
+print(fibonacci(7)) # Output: 13
 ```
 
-**Q10. Explain what `*args` and `**kwargs` are.**
-**Answer:** They are conventions used to pass a variable number of arguments to a function. `*args` is used to pass a non-keyworded, variable-length argument list (passed as a tuple). `**kwargs` is used to pass a keyworded, variable-length argument list (passed as a dictionary).
+**P3. Write a program to count the frequency of each character in a string using a dictionary.**
+```python
+def count_char_frequency(s):
+    freq_dict = {}
+    for char in s:
+        if char in freq_dict:
+            freq_dict[char] += 1
+        else:
+            freq_dict[char] = 1
+    return freq_dict
+
+print(count_char_frequency("hello world"))
+# Output: {'h': 1, 'e': 1, 'l': 3, 'o': 2, ' ': 1, 'w': 1, 'r': 1, 'd': 1}
+```
+
+**P4. Write a lambda function to sort a list of tuples based on the second element of each tuple.**
+```python
+students = [("Alice", 85), ("Bob", 92), ("Charlie", 78)]
+
+# Sort using a lambda function as the key
+# x represents each tuple, so x[1] is the score
+students.sort(key=lambda x: x[1], reverse=True)
+
+print(students)
+# Output: [('Bob', 92), ('Alice', 85), ('Charlie', 78)]
+```
+
+**P5. Write a function that accepts an arbitrary number of keyword arguments (`**kwargs`) and prints those whose values are integers.**
+```python
+def print_int_kwargs(**kwargs):
+    for key, value in kwargs.items():
+        if isinstance(value, int):
+            print(f"{key}: {value}")
+
+print_int_kwargs(name="Alice", age=25, city="NY", score=95)
+# Output:
+# age: 25
+# score: 95
+```
