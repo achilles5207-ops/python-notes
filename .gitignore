@@ -31,5 +31,14 @@ desktop.ini
 *.log
 .env
 
+# Data and DB files created during practice
+*.db
+*.sqlite
+*.sqlite3
+*.pkl
+*.dat
+*.csv
 
+# Ignore PDFs and resources
+*.pdf
 resources/*

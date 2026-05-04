@@ -1,15 +1,15 @@
 # 🐍 Python Notes
 
-Personal Python notes and code examples for my university course.
+Personal Python notes, textbook-style comprehensive guides, and interactive practice code for my university course.
 
 ## 📂 Structure
 
 ```
 python-notes/
 ├── .devcontainer/       # Dev container configuration
-├── notes/               # Markdown notes by topic
-├── notebooks/           # Jupyter notebooks for practice
-├── scripts/             # Standalone Python scripts
+├── notes/               # Comprehensive textbook-style markdown notes by topic
+├── notebooks/           # Interactive Jupyter notebooks for coding practice
+├── scripts/             # Standalone Python scripts (like notebook generators)
 └── requirements.txt     # Project dependencies
 ```
 
@@ -27,12 +27,13 @@ python-notes/
 
 ```bash
 python -m venv .venv
-.venv\Scripts\activate      # Windows
+# On Windows: .venv\Scripts\activate
+# On Linux/Mac: source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
 ## 📝 Usage
 
-- **Markdown notes** → `notes/` folder
-- **Jupyter notebooks** → `notebooks/` folder
-- **Python scripts** → `scripts/` folder
+- **Markdown notes** → Check the `notes/` folder for deeply detailed syllabus guides.
+- **Jupyter notebooks** → Check the `notebooks/` folder to practice code with questions, solutions, and pro-tips!
+- **Python scripts** → `scripts/` folder contains useful utility programs.
